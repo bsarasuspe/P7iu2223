@@ -1785,26 +1785,29 @@
     <script src="js/statictest.js" type="module"></script>
 
     <script>
+        const comparator_substring = (field, filter) => field.indexOf(filter) != -1
+        const comparator_eq = (field, filter) => field == filter
 
-
-        function advancedStudentFilter(filterSel, rowSel, field_selectors) {
+        function advancedStudentFilter(filterSel, rowSel, field_selectors_and_comparators) {
             const filterDiv = document.querySelector(filterSel);
 
             const valueAt = (row, i) => row.children[i].innerText || row.children[i].textContent;
 
             for (let r of document.querySelectorAll(rowSel)) {
                 let ok = true;
-                let col = -1;
-                for (let field_sel of field_selectors) {
-                    col++;
+                for (let col in field_selectors_and_comparators) {
+                    const field_sel = field_selectors_and_comparators[col].selector;
+                    const filter = filterDiv.querySelector(field_sel).value.toLowerCase();
 
-                    const current_field_value = filterDiv.querySelector(field_sel).value.toLowerCase();
-                    console.log(field_sel, current_field_value, col)
+                    if (filter == '' || !ok) continue;
+                    const value = valueAt(r, col).toLowerCase();
+                    console.log(field_sel, filter, value, col)
 
-                    if (current_field_value == '' || !ok) continue;
-                    const v = valueAt(r, col).toLowerCase();
-                    console.log(v, current_field_value, col, v.indexOf(current_field_value));
-                    if (v.indexOf(current_field_value) == -1) ok = false;
+                    console.log(value, filter, col, value.indexOf(filter));
+                    if (!field_selectors_and_comparators[col].comparator(value, filter)) {
+                        console.log("no pasa el filtro", field_selectors_and_comparators[col].comparator)
+                        ok = false;
+                    }
 
                 }
                 r.style.display = ok ? '' : 'none';
@@ -1841,7 +1844,17 @@
         document.querySelectorAll("#filter-in-students input, #filter-in-students select").forEach(o =>
             o.addEventListener('input', e => {
                 console.log("filtrando");
-                advancedStudentFilter("#filter-in-students", ".student-table-row", ["input[name=name_alumno]", "input[name=email_alumno]", "input[name=dni_alumno]", "input[name=grade_alumno]"]);
+                advancedStudentFilter("#filter-in-students", ".student-table-row", [
+                    {
+                        selector: "input[name=name_alumno]", comparator: comparator_substring
+                    }, {
+                        selector: "input[name=email_alumno]", comparator: comparator_substring
+                    }, {
+                        selector: "input[name=dni_alumno]", comparator: comparator_substring
+                    }, {
+                        selector: "input[name=grade_alumno]", comparator: comparator_eq
+                    }
+                ]);
             }));
     </script>
 </body>
