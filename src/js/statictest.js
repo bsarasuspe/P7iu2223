@@ -38,6 +38,7 @@ E.alternaBusquedaAvanzadaUsuarios("#search-advanced-toggle", "#search-in-users-i
 
 E.alternaBusquedaAvanzadaUsuarios("#search-advanced-toggle-courses", "#search-in-courses-input", "#filter-in-courses")
 
+E.alternaBusquedaAvanzadaUsuarios("#search-advanced-toggle_alumno", "#search-in-students-input", "#filter-in-students")
 // cosas que exponemos para poder usarlas desde la consola
 window.Cm = Cm;
 window.V = V;
