@@ -1095,8 +1095,46 @@
                         <input id="search-in-courses-input" type="search" class="form-control" placeholder="Filtrar">
                         <span class="input-group-text" id="search-in-users-button">🔍</span>
                     </div>
+                    <div class="col">
+                        <button id="search-advanced-toggle-courses" title="Búsqueda avanzada" class="add-user btn btn-outline-secondary">🔍🔍</button>
+                    </div>
                     <div class="col text-end">
                         <button title="Crea un nuevo curso" class="add-course btn btn-outline-primary">➕</button>
+                    </div>
+                </div>
+
+
+                <div id="filter-in-courses" class="m-2 p-2 border border-2 rounded">
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="search" name="coursename" class="m-1 form-control form-control-sm" name="" placeholder="Nombre o fragmento">
+                        </div>
+                        <div class="col-6">
+                            <select name="coursearea" class="m-1 form-select form-select-sm">
+                                <option value="">(ninguno)</option>
+                                <option value="ofimática">ofimática</option>
+                                <option value="internet">internet</option>
+                                <option value="tec. informáticas">tec. informáticas</option>
+                            </select>                
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <select name="courselevel" class="m-1 form-select form-select-sm">
+                                <option value="">(ninguno)</option>
+                                <option value="iniciación">iniciación</option>
+                                <option value="generalista">generalista</option>
+                                <option value="especialización">especialización</option>
+                            </select>                
+                        </div>
+                        <div class="col-6">
+                            <select name="courseyear" class="m-1 form-select form-select-sm">
+                                <option value="">(ninguno)</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                            </select>                
+                        </div>
                     </div>
                 </div>
 
@@ -1776,6 +1814,33 @@
         o.addEventListener('input', e => {
             console.log("filtrando");
             advancedUserFilter("#filter-in-users", ".user-table-row");
+        }));
+
+    function advancedCourseFilter(filterSel, rowSel) {
+        const filterDiv = document.querySelector(filterSel);
+        const name = filterDiv.querySelector("input[name=coursename]").value.toLowerCase();
+        const area = filterDiv.querySelector("select[name=coursearea]").value.toLowerCase();
+        const level = filterDiv.querySelector("select[name=courselevel]").value.toLowerCase();
+        const year = filterDiv.querySelector("select[name=courseyear]").value.toLowerCase();
+        
+        const valueAt = (row, i) => row.children[i].innerText || row.children[i].textContent;
+        
+        for (let r of document.querySelectorAll(rowSel)) {
+            let ok = true;
+            for (let [f, col] of 
+                [[name, 0], [area, 1], [level, 2], [year, 3]]) {
+                    if (f == '' || ! ok) continue;
+                    const v = valueAt(r, col).toLowerCase();
+                    console.log(v, f, col, v.indexOf(f));
+                    if (v.indexOf(f) == -1) ok = false;
+            }
+            r.style.display = ok ? '' : 'none';
+        }
+    }
+    document.querySelectorAll("#filter-in-courses input, #filter-in-courses select").forEach(o =>
+        o.addEventListener('input', e => {
+            console.log("filtrando");
+            advancedCourseFilter("#filter-in-courses", ".course-table-row");
         }));
     </script>
 </body>
