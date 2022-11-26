@@ -78,7 +78,44 @@ export function createUserTable(users) {
             <input id="search-in-users-input" type="search" class="form-control" placeholder="Filtrar" />
             <span class="input-group-text" id="search-in-users-button">🔍</span>
         </div>
+        <div class="col">
+            <button id="search-advanced-toggle" title="Búsqueda avanzada"
+                class=" btn btn-outline-secondary">🔍🔍</button>
+        </div>
         <div class="col text-end">${botonNuevoUsuario}</div>
+    </div>
+
+     <div id="filter-in-users" class="m-2 p-2 border border-2 rounded">
+        <div class="row">
+            <div class="col-8">
+                <input type="search" name="name" class="m-1 form-control form-control-sm" name=""
+                    placeholder="Nombre o fragmento">
+            </div>
+            <div class="col-4">
+                <input type="search" name="dni" class="m-1 form-control form-control-sm"
+                    placeholder="DNI o fragmento">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <input type="search" name="email" class="m-1 form-control form-control-sm"
+                    placeholder="correo o fragmento">
+            </div>
+            <div class="col-5">
+                <select name="role" class="m-1 form-select form-select-sm">
+                    <option value="">(ninguno)</option>
+                    <option value="admin">admin</option>
+                    <option value="alumno">alumno</option>
+                    <option value="profesor">profesor</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-danger w-100" name="reset">
+                    🗑️
+                    <!-- <img src="/media/deletefilters.png" class="h-100" alt="reset icons"> -->
+                </button>
+            </div>
+        </div>
     </div>
 
     <table class="table">
@@ -107,7 +144,7 @@ function ratingForEdition(results, e) {
         max++;
     });
     const estrellitas = n ?
-        `${''.padStart(Math.floor(rating/n), '⭐')} ${(rating/n).toFixed(1)}` :
+        `${''.padStart(Math.floor(rating / n), '⭐')} ${(rating / n).toFixed(1)}` :
         '(no disponible)'
     return `${estrellitas} ${n}/${max}`;
 }
@@ -130,7 +167,7 @@ function courseRow(course, editions, results) {
         <td>${ratings.join(' ')} 
             <button data-year="${year}" title="Crea una edición ${year} para el curso ${course.name}" 
                 class="add-edition btn btn-outline-primary btn-sm" 
-                ${hasCurrentEdition ? "":"disabled"}>➕</button>
+                ${hasCurrentEdition ? "" : "disabled"}>➕</button>
         </td>
         <td>
         <div class="btn-group">
@@ -160,7 +197,52 @@ export function createCoursesTable(courses) {
             <input id="search-in-courses-input" type="search" class="form-control" placeholder="Filtrar" />
             <span class="input-group-text" id="search-in-users-button">🔍</span>
         </div>
+        <div class="col">
+            <button id="search-advanced-toggle-courses" title="Búsqueda avanzada"
+                class=" btn btn-outline-secondary">🔍🔍</button>
+        </div>
         <div class="col text-end">${botonNuevoCurso}</div>
+    </div>
+
+    <div id="filter-in-courses" class="m-2 p-2 border border-2 rounded">
+        <div class="row">
+            <div class="col-6">
+                <input type="search" name="coursename" class="m-1 form-control form-control-sm" name=""
+                    placeholder="Nombre o fragmento">
+            </div>
+            <div class="col-6">
+                <select name="coursearea" class="m-1 form-select form-select-sm">
+                    <option value="">(ninguno)</option>
+                    <option value="ofimática">ofimática</option>
+                    <option value="internet">internet</option>
+                    <option value="tec. informáticas">tec. informáticas</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <select name="courselevel" class="m-1 form-select form-select-sm">
+                    <option value="">(ninguno)</option>
+                    <option value="iniciación">iniciación</option>
+                    <option value="generalista">generalista</option>
+                    <option value="especialización">especialización</option>
+                </select>
+            </div>
+            <div class="col-5">
+                <select name="courseyear" class="m-1 form-select form-select-sm">
+                    <option value="">(ninguno)</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-danger w-100" name="reset">
+                    🗑️
+                    <!-- <img src="/media/deletefilters.png" class="h-100" alt="reset icons"> -->
+                </button>
+            </div>
+        </div>
     </div>
 
     <table class="table">
@@ -253,8 +335,43 @@ export function createDetailsForEdition(edition) {
             <input id="search-in-students-input" type="search" class="form-control" placeholder="Filtrar" />
             <span class="input-group-text">🔍</span>
         </div>
+        <div class="col">
+            <button id="search-advanced-toggle_alumno" title="Búsqueda avanzada"
+                class="btn btn-outline-secondary">🔍🔍</button>
+        </div>
         <div class="col text-end">${botonMatricula("alumno")}</div>
     </div>
+
+    <div id="filter-in-students" class="m-2 p-2 border border-2 rounded">
+        <div class="row">
+            <div class="col-8">
+                <input type="search" name="name_alumno" class="m-1 form-control form-control-sm" name=""
+                    placeholder="Nombre o fragmento">
+            </div>
+            <div class="col-4">
+                <input type="search" name="dni_alumno" class="m-1 form-control form-control-sm"
+                    placeholder="DNI o fragmento">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <input type="search" name="email_alumno" class="m-1 form-control form-control-sm"
+                    placeholder="correo o fragmento">
+            </div>
+            <div class="col-5">
+                <input type="number" min="0" max="10" name="grade_alumno"
+                    class="m-1 form-control form-control-sm" placeholder="nota">
+                </input>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-danger w-100" name="reset">
+                    🗑️
+                    <!-- <img src="/media/deletefilters.png" class="h-100" alt="reset icons"> -->
+                </button>
+            </div>
+        </div>
+    </div>
+
     <table class="table w-100 ml-4">
     <tr>
         <th>Nombre</th>
@@ -331,8 +448,8 @@ export function createDetailsForUser(user) {
     <tr>
         <th>Edición</th>
         <th>Valoración global</th>
-        ${student ? '<th>Valoración propia</th>': ''}
-        ${student ? '<th>Nota</th>': ''}
+        ${student ? '<th>Valoración propia</th>' : ''}
+        ${student ? '<th>Nota</th>' : ''}
         <th>Acciones</th>
     </tr>
     ${filasEdicionUsuario}
@@ -360,7 +477,7 @@ function generateRadio(value, spanStyleDict, prevValue) {
     return `
                 <input class="form-check-input" type="radio" name="role" 
                     id="radio-${value}" value="${value}" required
-                    ${prevValue && prevValue==value ?"checked":""}>
+                    ${prevValue && prevValue == value ? "checked" : ""}>
                 <label class="form-check-label" for="radio-student">
                     <span class="${spanStyleDict[value]}">${value}</span></label>
                 </label>    
@@ -372,16 +489,16 @@ export function prepareAddOrEditUserModal(prev) {
     <form class="row g-3">
             <div class="col-md-12">
                 <input type="text" class="form-control" name="name" placeholder="Nombre" 
-                ${prev?.name ? 'value="'+prev.name+'"' : ''} required>
+                ${prev?.name ? 'value="' + prev.name + '"' : ''} required>
             </div>
 
             <div class="col-md-8">
                 <input type="email" class="form-control" name="email" placeholder="email" 
-                ${prev?.email ? 'value="'+prev.email+'"' : ''} required">
+                ${prev?.email ? 'value="' + prev.email + '"' : ''} required">
             </div>
             <div class="col-md-4">
                 <input type="text" class="form-control" name="dni" placeholder="DNI/NIE" 
-                ${prev?.dni ? 'value="'+prev.dni+'"' : ''} pattern="[0-9]{8}[A-Z]" required>
+                ${prev?.dni ? 'value="' + prev.dni + '"' : ''} pattern="[0-9]{8}[A-Z]" required>
             </div>
             <div class="col-md-12">
                 <hr>
@@ -402,7 +519,7 @@ export function prepareAddOrEditUserModal(prev) {
 
 function generateOption(value, spanStyleDict, prevValue) {
     return `
-                <option value="${value}" ${prevValue && prevValue==value ?"selected":""}>
+                <option value="${value}" ${prevValue && prevValue == value ? "selected" : ""}>
                     <span class="${spanStyleDict[value]}">${value}</span>
                 </option>
     `
@@ -413,7 +530,7 @@ export function prepareAddOrEditCourseModal(prev) {
     <form class="row g-3">
             <div class="col-md-12">
                 <input type="text" class="form-control" name="name" placeholder="Nombre" 
-                    ${prev?.name ? 'value="'+prev.name+'"' : ''} required>
+                    ${prev?.name ? 'value="' + prev.name + '"' : ''} required>
             </div>
 
             <div class="col-md-12">

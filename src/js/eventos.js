@@ -291,7 +291,7 @@ export function bindSortColumn(clickSelector) {
     }));
 }
 
-export function alternaBusquedaAvanzadaUsuarios(selBoton, selNormal, selAvanzada) {
+export function alternaBusquedaAvanzada(selBoton, selNormal, selAvanzada) {
     const avanzado = document.querySelector(selAvanzada);
     const normal = document.querySelector(selNormal).parentElement;
     document.querySelector(selBoton)
