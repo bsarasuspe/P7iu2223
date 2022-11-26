@@ -302,3 +302,36 @@ export function alternaBusquedaAvanzadaUsuarios(selBoton, selNormal, selAvanzada
         });
     avanzado.style.display = 'none';
 }
+
+function advancedFilterExecution(filterSel, rowSel, filter_fields) {
+    const filterDiv = document.querySelector(filterSel);
+
+    const valueAt = (row, i) => row.children[i].innerText || row.children[i].textContent;
+
+    for (let col in filter_fields) {
+        filter_fields[col].value = filterDiv.querySelector(filter_fields[col].selector).value.toLowerCase()
+    }
+
+    for (let r of document.querySelectorAll(rowSel)) {
+        let ok = true;
+        for (let col in filter_fields) {
+            const filter = filter_fields[col].value;
+
+            if (filter == '' || !ok) continue;
+            const value = valueAt(r, col).toLowerCase();
+
+            if (!filter_fields[col].comparator(value, filter)) {
+                ok = false;
+            }
+
+        }
+        r.style.display = ok ? '' : 'none';
+    }
+}
+
+export function bindFiltroAvanzado(filter_selector, row_selector, filter_fields){
+    document.querySelectorAll(`${filter_selector} input, ${filter_selector} select`).forEach(o =>
+        o.addEventListener('input', e => {
+            advancedFilterExecution(filter_selector, row_selector, filter_fields);
+        }));
+}

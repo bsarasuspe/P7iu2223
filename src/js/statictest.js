@@ -35,10 +35,47 @@ E.bindSearch("#search-in-user-editions-input", ".user-edition-table-row");
 E.bindSortColumn("tr>th");
 
 E.alternaBusquedaAvanzadaUsuarios("#search-advanced-toggle", "#search-in-users-input", "#filter-in-users")
-
 E.alternaBusquedaAvanzadaUsuarios("#search-advanced-toggle-courses", "#search-in-courses-input", "#filter-in-courses")
-
 E.alternaBusquedaAvanzadaUsuarios("#search-advanced-toggle_alumno", "#search-in-students-input", "#filter-in-students")
+
+const comparator_substring = (field, filter) => field.indexOf(filter) != -1
+const comparator_eq = (field, filter) => field == filter
+
+E.bindFiltroAvanzado("#filter-in-courses", ".course-table-row", [
+    {
+        selector: "input[name=coursename]", comparator: comparator_substring
+    }, {
+        selector: "select[name=coursearea]", comparator: comparator_eq
+    }, {
+        selector: "select[name=courselevel]", comparator: comparator_eq
+    }, {
+        selector: "select[name=courseyear]", comparator: comparator_eq
+    }
+])
+
+E.bindFiltroAvanzado("#filter-in-users", ".user-table-row", [
+    {
+        selector: "input[name=name]", comparator: comparator_substring
+    }, {
+        selector: "select[name=role]", comparator: comparator_eq
+    }, {
+        selector: "input[name=email]", comparator: comparator_substring
+    }, {
+        selector: "input[name=dni]", comparator: comparator_substring
+    }
+])
+E.bindFiltroAvanzado("#filter-in-students", ".student-table-row", [
+    {
+        selector: "input[name=name_alumno]", comparator: comparator_substring
+    }, {
+        selector: "input[name=email_alumno]", comparator: comparator_substring
+    }, {
+        selector: "input[name=dni_alumno]", comparator: comparator_substring
+    }, {
+        selector: "input[name=grade_alumno]", comparator: comparator_eq
+    }
+])
+
 // cosas que exponemos para poder usarlas desde la consola
 window.Cm = Cm;
 window.V = V;
