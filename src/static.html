@@ -78,17 +78,23 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <input type="search" name="email" class="m-1 form-control form-control-sm"
                                 placeholder="correo o fragmento">
                         </div>
-                        <div class="col-6">
+                        <div class="col-5">
                             <select name="role" class="m-1 form-select form-select-sm">
                                 <option value="">(ninguno)</option>
                                 <option value="admin">admin</option>
                                 <option value="alumno">alumno</option>
                                 <option value="profesor">profesor</option>
                             </select>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-danger w-100" name="reset">
+                                🗑️
+                                <!-- <img src="/media/deletefilters.png" class="h-100" alt="reset icons"> -->
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1125,7 +1131,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <select name="courselevel" class="m-1 form-select form-select-sm">
                                 <option value="">(ninguno)</option>
                                 <option value="iniciación">iniciación</option>
@@ -1133,13 +1139,19 @@
                                 <option value="especialización">especialización</option>
                             </select>
                         </div>
-                        <div class="col-6">
+                        <div class="col-5">
                             <select name="courseyear" class="m-1 form-select form-select-sm">
                                 <option value="">(ninguno)</option>
                                 <option value="2020">2020</option>
                                 <option value="2021">2021</option>
                                 <option value="2022">2022</option>
                             </select>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-danger w-100" name="reset">
+                                🗑️
+                                <!-- <img src="/media/deletefilters.png" class="h-100" alt="reset icons"> -->
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1533,14 +1545,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <input type="search" name="email_alumno" class="m-1 form-control form-control-sm"
                                 placeholder="correo o fragmento">
                         </div>
-                        <div class="col-6">
+                        <div class="col-5">
                             <input type="number" min="0" max="10" name="grade_alumno"
                                 class="m-1 form-control form-control-sm" placeholder="nota">
                             </input>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-danger w-100" name="reset">
+                                🗑️
+                                <!-- <img src="/media/deletefilters.png" class="h-100" alt="reset icons"> -->
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1824,57 +1842,6 @@
     <!-- Todos los scripts de interaccion, aqui -->
     <script src="js/statictest.js" type="module"></script>
 
-    <script>
-
-        // table filter comparators
-
-
-        // document.querySelectorAll("#filter-in-courses input, #filter-in-courses select").forEach(o =>
-        //     o.addEventListener('input', e => {
-        //         advancedFilterExecution("#filter-in-courses", ".course-table-row", [
-        //             {
-        //                 selector: "input[name=coursename]", comparator: comparator_substring
-        //             }, {
-        //                 selector: "select[name=coursearea]", comparator: comparator_eq
-        //             }, {
-        //                 selector: "select[name=courselevel]", comparator: comparator_eq
-        //             }, {
-        //                 selector: "select[name=courseyear]", comparator: comparator_eq
-        //             }
-        //         ]);
-        //     }));
-
-
-        // document.querySelectorAll("#filter-in-users input, #filter-in-users select").forEach(o =>
-        //     o.addEventListener('input', e => {
-        //         advancedFilterExecution("#filter-in-users", ".user-table-row", [
-        //             {
-        //                 selector: "input[name=name]", comparator: comparator_substring
-        //             }, {
-        //                 selector: "select[name=role]", comparator: comparator_eq
-        //             }, {
-        //                 selector: "input[name=email]", comparator: comparator_substring
-        //             }, {
-        //                 selector: "input[name=dni]", comparator: comparator_substring
-        //             }
-        //         ]);
-        //     }));
-
-        // document.querySelectorAll("#filter-in-students input, #filter-in-students select").forEach(o =>
-        //     o.addEventListener('input', e => {
-        //         advancedFilterExecution("#filter-in-students", ".student-table-row", [
-        //             {
-        //                 selector: "input[name=name_alumno]", comparator: comparator_substring
-        //             }, {
-        //                 selector: "input[name=email_alumno]", comparator: comparator_substring
-        //             }, {
-        //                 selector: "input[name=dni_alumno]", comparator: comparator_substring
-        //             }, {
-        //                 selector: "input[name=grade_alumno]", comparator: comparator_eq
-        //             }
-        //         ]);
-        //     }));
-    </script>
 </body>
 
 </html>

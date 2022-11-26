@@ -41,6 +41,8 @@ E.alternaBusquedaAvanzadaUsuarios("#search-advanced-toggle_alumno", "#search-in-
 const comparator_substring = (field, filter) => field.indexOf(filter) != -1
 const comparator_eq = (field, filter) => field == filter
 
+
+
 E.bindFiltroAvanzado("#filter-in-courses", ".course-table-row", [
     {
         selector: "input[name=coursename]", comparator: comparator_substring

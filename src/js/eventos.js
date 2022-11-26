@@ -275,8 +275,8 @@ export function bindSortColumn(clickSelector) {
         // devuelve una función de comparación para 2 elementos, sobre col. idx, creciente o no (asc)
         const comparador = (idx, asc) => (a, b) => ((v1, v2) =>
             v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ?
-            v1 - v2 :
-            v1.toString().localeCompare(v2)
+                v1 - v2 :
+                v1.toString().localeCompare(v2)
         )(valueAt(asc ? a : b, idx), valueAt(asc ? b : a, idx));
 
         // comprueba y actualiza asc (ascendente)
@@ -329,9 +329,20 @@ function advancedFilterExecution(filterSel, rowSel, filter_fields) {
     }
 }
 
-export function bindFiltroAvanzado(filter_selector, row_selector, filter_fields){
+export function bindFiltroAvanzado(filter_selector, row_selector, filter_fields) {
+
+    const execute_filter = () => advancedFilterExecution(filter_selector, row_selector, filter_fields);
     document.querySelectorAll(`${filter_selector} input, ${filter_selector} select`).forEach(o =>
         o.addEventListener('input', e => {
-            advancedFilterExecution(filter_selector, row_selector, filter_fields);
+            execute_filter()
         }));
+
+    document.querySelector(filter_selector).querySelector("button[name=reset]").addEventListener("click", () => {
+        filter_fields.forEach(({ selector }) => {
+            document.querySelector(selector).value = "";
+        })
+        execute_filter()
+    })
+
 }
+
