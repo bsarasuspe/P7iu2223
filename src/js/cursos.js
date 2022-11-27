@@ -89,8 +89,6 @@ function update() {
 
         E.bindSortColumn("tr>th");
 
-
-
         const comparator_substring = (field, filter) => field.indexOf(filter) != -1
         const comparator_eq = (field, filter) => field == filter
 

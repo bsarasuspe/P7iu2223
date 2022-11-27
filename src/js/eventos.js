@@ -283,6 +283,18 @@ export function bindSortColumn(clickSelector) {
         let asc = th.dataset.asc || 0;
         th.setAttribute("data-asc", asc == 0 ? 1 : 0)
 
+        // Acceder al hijo <i> del th y actualizar su clase para mostrar la flecha
+        const i = th.querySelector("i");
+
+        // Quitamos fa-sort up y down
+        i.className = i.className.replace(/fa-sort-(up|down)/, "");
+
+        i.classList.remove("fa-sort");
+        i.classList.remove("opacity-50"); // La opacidad empiza en 50 porque no hay ordenación
+
+        // Lo añadimos
+        i.classList.add("fas", asc == 0 ? "fa-sort-up" : "fa-sort-down");
+
         // reordena las filas y almacena la ordenación para la siguiente iteración
         Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
             .sort(comparador(Array.from(th.parentNode.children).indexOf(th), asc == 1))

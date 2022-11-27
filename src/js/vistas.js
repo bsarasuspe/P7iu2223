@@ -120,12 +120,12 @@ export function createUserTable(users) {
 
     <table class="table">
     <tr>
-        <th>Nombre</th>
-        <th>Rol</th>
-        <th>Correo</th>
-        <th>DNI</th>
-        <th title="número de ediciones en las que es alumno y/ó profesor">A/P</th>
-        <th>Acciones</th>        
+        <th>Nombres <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th>Rol <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th>Correo <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th>DNI <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th title="número de ediciones en las que es alumno y/ó profesor">A/P <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th>Acciones <i class="fa fa-fw fa-sort opacity-50"></i></th>        
     </tr>
     ${filas}
     </table>
