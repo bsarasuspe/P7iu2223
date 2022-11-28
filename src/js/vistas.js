@@ -120,12 +120,12 @@ export function createUserTable(users) {
 
     <table class="table">
     <tr>
-        <th class="no-select" >Nombres <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th class="no-select" >Rol <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th class="no-select" >Correo <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th class="no-select" >DNI <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th class="no-select"  title="número de ediciones en las que es alumno y/ó profesor">A/P <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th class="no-select" >Acciones <i class="fa fa-fw fa-sort opacity-50"></i></th>        
+        <th class="no-select" >Nombres </th>
+        <th class="no-select" >Rol </th>
+        <th class="no-select" >Correo </th>
+        <th class="no-select" >DNI </th>
+        <th class="no-select" title="número de ediciones en las que es alumno y/ó profesor">A/P </th>
+        <th class="no-select" >Acciones </th>        
     </tr>
     ${filas}
     </table>
@@ -277,7 +277,7 @@ function studentRow(user, edition, results) {
 
 function teacherRow(user, edition, results) {
     return `
-    <tr class="teacher-table-row" data-user-id="${user.id}" data-edition-id="${edition.id}">>
+    <tr class="teacher-table-row" data-user-id="${user.id}" data-edition-id="${edition.id}">
         <td>${user.name}</td>
         <td>${user.email}</td>
         <td>${user.dni}</td>
