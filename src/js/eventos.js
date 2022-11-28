@@ -300,6 +300,16 @@ export function bindSortColumn(clickSelector) {
             .sort(comparador(Array.from(th.parentNode.children).indexOf(th), asc == 1))
             .forEach(tr => table.appendChild(tr));
 
+        // El resto de columnas no tienen ordenación, por lo que hay que quitar la clase 
+        // y añadir fa-sort y opacity-50
+        U.all(clickSelector).forEach(o => {
+            if (o != th) {
+                const i = o.querySelector("i");
+                i.className = i.className.replace(/fa-sort-(up|down)/, "");
+                i.classList.remove("fas");
+                i.classList.add("fa-sort", "opacity-50");
+            }
+        });
     }));
 }
 
