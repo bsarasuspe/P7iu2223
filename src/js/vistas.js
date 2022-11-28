@@ -120,12 +120,12 @@ export function createUserTable(users) {
 
     <table class="table">
     <tr>
-        <th>Nombres <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th>Rol <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th>Correo <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th>DNI <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th title="número de ediciones en las que es alumno y/ó profesor">A/P <i class="fa fa-fw fa-sort opacity-50"></i></th>
-        <th>Acciones <i class="fa fa-fw fa-sort opacity-50"></i></th>        
+        <th class="no-select" >Nombres <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th class="no-select" >Rol <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th class="no-select" >Correo <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th class="no-select" >DNI <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th class="no-select"  title="número de ediciones en las que es alumno y/ó profesor">A/P <i class="fa fa-fw fa-sort opacity-50"></i></th>
+        <th class="no-select" >Acciones <i class="fa fa-fw fa-sort opacity-50"></i></th>        
     </tr>
     ${filas}
     </table>
@@ -247,11 +247,11 @@ export function createCoursesTable(courses) {
 
     <table class="table">
     <tr>
-        <th>Nombre</th>
-        <th>Área</th>
-        <th>Nivel</th>
-        <th>Ediciones</th>
-        <th>Acciones</th>
+        <th class="no-select">Nombre</th>
+        <th class="no-select">Área</th>
+        <th class="no-select">Nivel</th>
+        <th class="no-select">Ediciones</th>
+        <th class="no-select">Acciones</th>
     </tr>
     ${filas}
     </table>
@@ -321,10 +321,10 @@ export function createDetailsForEdition(edition) {
     </div>
     <table class="table w-100 ml-4">
     <tr>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>DNI</th>
-        <th>Acciones</th>
+        <th class="no-select" >Nombre</th>
+        <th class="no-select" >Correo</th>
+        <th class="no-select" >DNI</th>
+        <th class="no-select" >Acciones</th>
     </tr>
     ${filasProfesor}
     </table>
@@ -374,11 +374,11 @@ export function createDetailsForEdition(edition) {
 
     <table class="table w-100 ml-4">
     <tr>
-        <th>Nombre</th>
-        <th>Correo</th>
-        <th>DNI</th>
-        <th>Nota</th>
-        <th>Acciones</th>
+        <th class="no-select" >Nombre</th>
+        <th class="no-select" >Correo</th>
+        <th class="no-select" >DNI</th>
+        <th class="no-select" >Nota</th>
+        <th class="no-select" >Acciones</th>
     </tr>
     ${filasAlumno}
     </table>
@@ -446,11 +446,11 @@ export function createDetailsForUser(user) {
     </div>
     <table class="table w-100">
     <tr>
-        <th>Edición</th>
-        <th>Valoración global</th>
+        <th class="no-select">Edición</th>
+        <th class="no-select">Valoración global</th>
         ${student ? '<th>Valoración propia</th>' : ''}
         ${student ? '<th>Nota</th>' : ''}
-        <th>Acciones</th>
+        <th class="no-select">Acciones</th>
     </tr>
     ${filasEdicionUsuario}
     </table>   
