@@ -90,6 +90,7 @@ function update() {
         E.bindSortColumn("tr>th");
 
         E.bindCheckboxColumn("#users");
+        E.bindCheckboxColumn("#users", "cambioSelUsuarios");
 
         const comparator_substring = (field, filter) => field.indexOf(filter) != -1
         const comparator_eq = (field, filter) => field == filter
