@@ -43,6 +43,7 @@ function userRow(user, editions) {
     const docencia = editions.filter(o => o.teachers.indexOf(user.id) != -1)
     return `
     <tr data-id="${user.id}" class="user-table-row">
+        <td><input type="checkbox" value="${user.id}" name="users"/></td>
         <td>${user.name}</td>
         <td><span class="${roleClasses[user.role]}">${user.role}</span></td>
         <td>${user.email}</td>
@@ -120,6 +121,7 @@ export function createUserTable(users) {
 
     <table class="table">
     <tr>
+        <th><input type="checkbox" name="toggle"/></td>
         <th class="no-select" >Nombres </th>
         <th class="no-select" >Rol </th>
         <th class="no-select" >Correo </th>
