@@ -264,6 +264,7 @@ export function bindSetResults(clickSelector, callback) {
 }
 
 export function bindSortColumn(clickSelector) {
+    U.all(clickSelector).forEach(o => o.innerHTML += '<i class="fa fa-fw fa-sort opacity-50 click-transparent"></i>')
     U.all(clickSelector).forEach(o => o.addEventListener('click', e => {
         const th = e.target;
         const table = th.closest('table');
