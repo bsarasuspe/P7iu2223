@@ -267,7 +267,7 @@ export function bindSortColumn(clickSelector) {
     U.all(clickSelector).forEach(o => o.innerHTML += '<i class="fa fa-fw fa-sort opacity-50 click-transparent"></i>')
     U.all(clickSelector).forEach(o => o.addEventListener('click', e => {
         const th = e.target;
-        const table = th.closest('table');
+        const table = th.closest('tbody');
 
         // devuelve el valor en la columna i-esima
         // ver https://stackoverflow.com/a/49041392/15472
