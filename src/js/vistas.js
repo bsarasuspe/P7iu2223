@@ -103,7 +103,7 @@ export function createUserTable(users) {
             </div>
             <div class="col-5">
                 <select name="role" class="m-1 form-select form-select-sm">
-                    <option value="">(ninguno)</option>
+                    <option value="ninguno">(ninguno)</option>
                     <option value="admin">admin</option>
                     <option value="alumno">alumno</option>
                     <option value="profesor">profesor</option>
@@ -195,7 +195,7 @@ export function createCoursesTable(courses) {
     <div class="row">
         <div class="col md-auto input-group">
             <input id="search-in-courses-input" type="search" class="form-control" placeholder="Filtrar" />
-            <span class="input-group-text" id="search-in-users-button">🔍</span>
+            <span class="input-group-text" id="search-in-courses-button">🔍</span>
         </div>
         <div class="col">
             <button id="search-advanced-toggle-courses" title="Búsqueda avanzada"
@@ -212,7 +212,7 @@ export function createCoursesTable(courses) {
             </div>
             <div class="col-6">
                 <select name="coursearea" class="m-1 form-select form-select-sm">
-                    <option value="">(ninguno)</option>
+                    <option value="ninguno">(ninguno)</option>
                     <option value="ofimática">ofimática</option>
                     <option value="internet">internet</option>
                     <option value="tec. informáticas">tec. informáticas</option>
@@ -222,7 +222,7 @@ export function createCoursesTable(courses) {
         <div class="row">
             <div class="col-5">
                 <select name="courselevel" class="m-1 form-select form-select-sm">
-                    <option value="">(ninguno)</option>
+                    <option value="ninguno">(ninguno)</option>
                     <option value="iniciación">iniciación</option>
                     <option value="generalista">generalista</option>
                     <option value="especialización">especialización</option>
@@ -230,7 +230,7 @@ export function createCoursesTable(courses) {
             </div>
             <div class="col-5">
                 <select name="courseyear" class="m-1 form-select form-select-sm">
-                    <option value="">(ninguno)</option>
+                    <option value="ninguno">(ninguno)</option>
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
