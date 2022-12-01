@@ -82,6 +82,12 @@ export function createUserTable(users) {
         <div class="col">
             <button id="search-advanced-toggle" title="Búsqueda avanzada"
                 class=" btn btn-outline-secondary">🔍🔍</button>
+                <button class="btn btn-danger w-30" name="reset">
+                🗑️
+            </button>
+            <button class="btn btn-success w-30" name="reset">
+                🎓
+            </button>
         </div>
         <div class="col text-end">${botonNuevoUsuario}</div>
     </div>
