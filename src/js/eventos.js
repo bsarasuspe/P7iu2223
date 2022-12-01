@@ -28,25 +28,39 @@ export function bindDetails(clickSelector, detailsSelector, htmlGenerationFn, li
 
 
 export function bindRmFromEdition(clickSelector, callback) {
-    U.all(clickSelector).forEach(o => o.addEventListener('click', e => {
-        const userId = e.target.closest('tr').dataset.userId;
-        const editionId = e.target.closest('tr').dataset.editionId;
-        console.log(e, userId, editionId);
-        const edition = Cm.resolve(editionId);
-        edition.students = edition.students.filter(o => o != userId);
-        edition.teachers = edition.students.filter(o => o != userId);
-        Cm.setEdition(edition);
-        e.target.closest("tr").remove();
-        callback();
-    }));
+    U.all(clickSelector).forEach(o => {
+        if (!o.listening) {
+            o.listening = true;
+            o.addEventListener('click', e => {
+                const userId = e.target.closest('tr').dataset.userId;
+                const editionId = e.target.closest('tr').dataset.editionId;
+                if (confirm("eliminar usuario " + Cm.resolve(userId).name + " de la edicion " + Cm.resolve(editionId).name + "?")) {
+                    console.log(e, userId, editionId);
+                    const edition = Cm.resolve(editionId);
+                    edition.students = edition.students.filter(o => o != userId);
+                    edition.teachers = edition.students.filter(o => o != userId);
+                    Cm.setEdition(edition);
+                    e.target.closest("tr").remove();
+                    callback();
+                }
+            })
+        }
+    });
 }
 
 export function bindRmEditionDetails(clickSelector, callback) {
     U.one(clickSelector).addEventListener('click', e => {
-        const id = e.target.dataset.id;
-        console.log(e, id);
-        Cm.rmEdition(id);
-        callback();
+
+        if (!o.listening) {
+            o.listening = true;
+            const id = e.target.dataset.id;
+            if (confirm("eliminar edicion" + Cm.resolve(id).name + "?")) {
+
+                console.log(e, id);
+                Cm.rmEdition(id);
+                callback();
+            }
+        }
     });
 }
 
@@ -64,9 +78,12 @@ export function bindRmCourseRow(clickSelector) {
     U.all(clickSelector).forEach(o => o.addEventListener('click', e => {
         const row = e.target.closest("tr");
         const id = row.dataset.id;
-        console.log(e, id);
-        Cm.rmCourse(id);
-        row.remove();
+        if (confirm("eliminar curso " + Cm.resolve(id).name + "?")) {
+            console.log(e, id);
+            Cm.rmCourse(id);
+            row.remove();
+        }
+
     }));
 }
 
@@ -74,9 +91,12 @@ export function bindRmUserRow(clickSelector) {
     U.all(clickSelector).forEach(o => o.addEventListener('click', e => {
         const row = e.target.closest("tr");
         const id = row.dataset.id;
-        console.log(e, id);
-        Cm.rmUser(id);
-        row.remove();
+        if (confirm(`eliminar usuario ${JSON.stringify(Cm.resolve(row.dataset.id).name)}?`)) {
+
+            console.log(e, id);
+            Cm.rmUser(id);
+            row.remove();
+        }
     }));
 }
 
@@ -264,7 +284,10 @@ export function bindSetResults(clickSelector, callback) {
 }
 
 export function bindSortColumn(clickSelector) {
-    U.all(clickSelector).forEach(o => o.innerHTML += '<i class="fa fa-fw fa-sort opacity-50 click-transparent"></i>')
+    U.all(clickSelector).forEach(o => {
+        if (o.children.length == 0)
+            o.innerHTML += '<i class="fa fa-fw fa-sort opacity-50 click-transparent"></i>'
+    })
     U.all(clickSelector).forEach(o => o.addEventListener('click', e => {
         const th = e.target;
         const table = th.closest('tbody');
@@ -286,7 +309,6 @@ export function bindSortColumn(clickSelector) {
 
         // Acceder al hijo <i> del th y actualizar su clase para mostrar la flecha
         const i = th.querySelector("i");
-
         // Quitamos fa-sort up y down
         i.className = i.className.replace(/fa-sort-(up|down)/, "");
 
@@ -304,11 +326,14 @@ export function bindSortColumn(clickSelector) {
         // El resto de columnas no tienen ordenación, por lo que hay que quitar la clase 
         // y añadir fa-sort y opacity-50
         U.all(clickSelector).forEach(o => {
+            console.log(o)
             if (o != th) {
                 const i = o.querySelector("i");
-                i.className = i.className.replace(/fa-sort-(up|down)/, "");
-                i.classList.remove("fas");
-                i.classList.add("fa-sort", "opacity-50");
+                if (i) {
+                    i.className = i.className.replace(/fa-sort-(up|down)/, "");
+                    i.classList.remove("fas");
+                    i.classList.add("fa-sort", "opacity-50");
+                }
             }
         });
     }));
@@ -384,7 +409,7 @@ export function bindFiltroAvanzado(filter_selector, row_selector, filter_fields)
  * @param {*} selTabla 
  * @param {*} evtName 
  */
- export function bindCheckboxColumn(selTabla, evtName) {
+export function bindCheckboxColumn(selTabla, evtName) {
     const table = U.one(selTabla);
     const toggle = table.querySelector("input[name=toggle]");
     const rows = table.querySelectorAll('tr:nth-child(n+2)');
@@ -403,7 +428,7 @@ export function bindFiltroAvanzado(filter_selector, row_selector, filter_fields)
 
     const updateToggleState = () => {
         const [visibleRows, checkedRows] = visibleAndSelected()
-            // ver https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
+        // ver https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
         if (checkedRows.length == 0) {
             toggle.checked = false;
             toggle.indeterminate = false;
