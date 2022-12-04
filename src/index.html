@@ -36,7 +36,6 @@
 </head>
 
 <body>
-
     <!-- Navbar principal -->
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
@@ -64,13 +63,20 @@
                     </li>
                 </ul>
             </div>
+            <div class="nav-item ms-auto">
+                <div class="btn-group">
+                    <button id="save" class="btn btn-outline-secondary">💾</button>
+                    <button id="clean" class="btn btn-outline-secondary">🧽</button>
+                    <button id="restore" class="btn btn-outline-secondary">↩️</button>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Div principal; container-fluid expande el contenedor para que ocupe todo el espacio disponible -->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 ml-3">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="usuarios-tab" data-bs-toggle="tab"
