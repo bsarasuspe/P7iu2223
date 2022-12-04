@@ -3,6 +3,8 @@
 import * as Cm from './cmapi.js'
 import * as U from './util.js'
 
+const custom_confirm = U.custom_confirm;
+
 /**
  * Para las prácticas de IU, pon aquí (o en otros js externos incluidos desde tus .htmls) el código
  * necesario para añadir comportamientos a tus páginas.
@@ -31,10 +33,10 @@ export function bindRmFromEdition(clickSelector, callback) {
     U.all(clickSelector).forEach(o => {
         if (!o.listening) {
             o.listening = true;
-            o.addEventListener('click', e => {
+            o.addEventListener('click', async e => {
                 const userId = e.target.closest('tr').dataset.userId;
                 const editionId = e.target.closest('tr').dataset.editionId;
-                if (confirm("eliminar usuario " + Cm.resolve(userId).name + " de la edicion " + Cm.resolve(editionId).name + "?")) {
+                if (await custom_confirm("eliminar usuario " + Cm.resolve(userId).name + " de la edicion " + Cm.resolve(editionId).name + "?")) {
                     console.log(e, userId, editionId);
                     const edition = Cm.resolve(editionId);
                     edition.students = edition.students.filter(o => o != userId);
@@ -49,12 +51,12 @@ export function bindRmFromEdition(clickSelector, callback) {
 }
 
 export function bindRmEditionDetails(clickSelector, callback) {
-    U.one(clickSelector).addEventListener('click', e => {
+    U.one(clickSelector).addEventListener('click', async e => {
 
         if (!o.listening) {
             o.listening = true;
             const id = e.target.dataset.id;
-            if (confirm("eliminar edicion" + Cm.resolve(id).name + "?")) {
+            if (await custom_confirm("eliminar edicion" + Cm.resolve(id).name + "?")) {
 
                 console.log(e, id);
                 Cm.rmEdition(id);
@@ -75,10 +77,10 @@ export function bindAddEditionToCourse(clickSelector, callback) {
 }
 
 export function bindRmCourseRow(clickSelector) {
-    U.all(clickSelector).forEach(o => o.addEventListener('click', e => {
+    U.all(clickSelector).forEach(o => o.addEventListener('click', async e => {
         const row = e.target.closest("tr");
         const id = row.dataset.id;
-        if (confirm("eliminar curso " + Cm.resolve(id).name + "?")) {
+        if (await custom_confirm("eliminar curso " + Cm.resolve(id).name + "?")) {
             console.log(e, id);
             Cm.rmCourse(id);
             row.remove();
@@ -88,10 +90,10 @@ export function bindRmCourseRow(clickSelector) {
 }
 
 export function bindRmUserRow(clickSelector) {
-    U.all(clickSelector).forEach(o => o.addEventListener('click', e => {
+    U.all(clickSelector).forEach(o => o.addEventListener('click', async e => {
         const row = e.target.closest("tr");
         const id = row.dataset.id;
-        if (confirm(`eliminar usuario ${JSON.stringify(Cm.resolve(row.dataset.id).name)}?`)) {
+        if (await custom_confirm(`eliminar usuario ${JSON.stringify(Cm.resolve(row.dataset.id).name)}?`)) {
 
             console.log(e, id);
             Cm.rmUser(id);

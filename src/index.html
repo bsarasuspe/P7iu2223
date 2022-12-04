@@ -134,6 +134,29 @@
         </div>
     </div>
 
+    <!-- 
+            Modal para pedir confirmación
+            siempre usamos el mismo, y no se muestra hasta que hace falta
+        -->
+    <div class="modal fade" id="confirmation_modal" tabindex="-1" aria-labelledby="cmConfirmLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmation_msg">
+                        <!-- reemplazar desde JS -->
+                        Editando patata
+                    </h5>
+                    <button type="button" id="confirmation_exit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+               
+                <div class="modal-footer">
+                    <button type="button" id="confirmation_cancel" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmation_ok" class="btn btn-danger edit">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap usando una copia local -->
     <script src="js/bootstrap-5.2.2.bundle.js"></script>
 

@@ -360,3 +360,35 @@ export function sameAs(o, pattern) {
     }
     return true;
 }
+
+let confirmation_callback;
+let disable_next_confirmation = false;
+
+document.querySelector("#confirmation_ok").addEventListener("click", () => { confirmation_callback(true) })
+document.querySelector("#confirmation_cancel").addEventListener("click", () => { confirmation_callback(false) })
+document.querySelector("#confirmation_modal").addEventListener("click", () => { confirmation_callback(false) })
+document.querySelector("#confirmation_exit").addEventListener("click", () => { confirmation_callback(false) })
+document.querySelector("#confirmation_modal > :first-child > :first-child").addEventListener("click", () => { disable_next_confirmation = true; })
+
+export function custom_confirm(msg) {
+
+    console.log(msg, document.querySelector("#confirmation_modal"))
+    document.querySelector("#confirmation_msg").textContent = msg;
+    document.querySelector("#confirmation_modal").className = "modal fade show"
+    document.querySelector("#confirmation_modal").style.display = "block"
+
+    let backdrop = document.createElement("div");
+    backdrop.className = "modal-backdrop fade show";
+    document.body.appendChild(backdrop)
+
+    return new Promise((r) => {
+        confirmation_callback = (val) => {
+            if (disable_next_confirmation) { disable_next_confirmation = false; return }
+            document.querySelector("#confirmation_modal").className = "modal fade"
+            document.querySelector("#confirmation_modal").style.display = ""
+            backdrop.parentNode.removeChild(backdrop);
+            r(val);
+        };
+
+    })
+}
