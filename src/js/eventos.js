@@ -311,14 +311,16 @@ export function bindSortColumn(clickSelector) {
 
         // Acceder al hijo <i> del th y actualizar su clase para mostrar la flecha
         const i = th.querySelector("i");
-        // Quitamos fa-sort up y down
-        i.className = i.className.replace(/fa-sort-(up|down)/, "");
+        if (i) {
+            // Quitamos fa-sort up y down
+            i.className = i.className.replace(/fa-sort-(up|down)/, "");
 
-        i.classList.remove("fa-sort");
-        i.classList.remove("opacity-50"); // La opacidad empiza en 50 porque no hay ordenación
+            i.classList.remove("fa-sort");
+            i.classList.remove("opacity-50"); // La opacidad empiza en 50 porque no hay ordenación
 
-        // Lo añadimos
-        i.classList.add("fas", asc == 0 ? "fa-sort-up" : "fa-sort-down");
+            // Lo añadimos
+            i.classList.add("fas", asc == 0 ? "fa-sort-up" : "fa-sort-down");
+        }
 
         // reordena las filas y almacena la ordenación para la siguiente iteración
         Array.from(table.querySelectorAll('tr:nth-child(n+2)'))
@@ -328,7 +330,7 @@ export function bindSortColumn(clickSelector) {
         // El resto de columnas no tienen ordenación, por lo que hay que quitar la clase 
         // y añadir fa-sort y opacity-50
         U.all(clickSelector).forEach(o => {
-            console.log(o)
+            // console.log(o)
             if (o != th) {
                 const i = o.querySelector("i");
                 if (i) {
@@ -411,7 +413,7 @@ export function bindFiltroAvanzado(filter_selector, row_selector, filter_fields)
  * @param {*} selTabla 
  * @param {*} evtName 
  */
-export function bindCheckboxColumn(selTabla, evtName) {
+export function bindCheckboxColumn(selTabla, evtName, update) {
     const table = U.one(selTabla);
     const toggle = table.querySelector("input[name=toggle]");
     const rows = table.querySelectorAll('tr:nth-child(n+2)');
@@ -458,8 +460,38 @@ export function bindCheckboxColumn(selTabla, evtName) {
             updateToggleState()
         }))
 
+    let bulk_delete = document.querySelector("button[name='bulk_delete']")
+    bulk_delete.style.display = "none"
+    let bulk_enroll = document.querySelector("button[name='bulk_enroll']")
+    bulk_enroll.style.display = "none";
 
-    // EJEMPLO DE CAPTURA DE EVENTO DE CAMBIO DE SELECCION - usalo en tu código
-    if (evtName) table.addEventListener(evtName, e => console.log(e.detail));
+    let selected = [];
+    bulk_delete.addEventListener("click", async () => {
+        if (await custom_confirm(`eliminar los usuarios selecionados?`)) {
+
+            for (let id of selected){
+                Cm.rmUser(id);
+            }
+            update();
+            
+        }
+    })
+
+
+
+    if (evtName) table.addEventListener(evtName, e => {
+        console.log(e)
+        selected = JSON.parse(e.detail);
+
+        if (selected.length == 0) {
+            bulk_delete.style.display = "none"
+            bulk_enroll.style.display = "none"
+        } else {
+            bulk_delete.style.display = ""
+            bulk_enroll.style.display = ""
+        }
+
+
+    });
 }
 

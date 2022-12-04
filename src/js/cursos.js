@@ -89,11 +89,11 @@ function update() {
 
         E.bindSortColumn("tr>th");
 
-        E.bindCheckboxColumn("#users");
-        E.bindCheckboxColumn("#users", "cambioSelUsuarios");
+        E.bindCheckboxColumn("#users", "cambioSelUsuarios", update);
 
         const comparator_substring = (field, filter) => field.indexOf(filter) != -1
         const comparator_eq = (field, filter) => field == filter
+        const comparator_ignore = () => true
 
 
         try {
@@ -113,6 +113,7 @@ function update() {
         try {
             E.alternaBusquedaAvanzada("#search-advanced-toggle", "#search-in-users-input", "#filter-in-users")
             E.bindFiltroAvanzado("#filter-in-users", ".user-table-row", [
+                { selector: "input[name=name]", comparator: comparator_ignore },
                 {
                     selector: "input[name=name]", comparator: comparator_substring
                 }, {
