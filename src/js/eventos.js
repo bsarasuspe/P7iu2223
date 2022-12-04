@@ -468,16 +468,33 @@ export function bindCheckboxColumn(selTabla, evtName, update) {
     let selected = [];
     bulk_delete.addEventListener("click", async () => {
         if (await custom_confirm(`eliminar los usuarios selecionados?`)) {
-
-            for (let id of selected){
+            for (let id of selected) {
                 Cm.rmUser(id);
             }
             update();
-            
         }
     })
 
+    bulk_enroll.addEventListener("click", async () => {
 
+        let ret = await U.edition_select();
+        console.log(ret);
+        if (!ret) return;
+
+        let edition = Cm.getEditions().filter(({ id }) => id == ret.edition)[0];
+        console.log(edition);
+
+        for (let id of selected) {
+            if (ret.tipo_de_usuario == "profesor") edition.teachers.push(id);
+
+            if (ret.tipo_de_usuario == "alumno") edition.students.push(id);
+
+        }
+        Cm.setEdition(edition)
+
+        console.log(edition);
+
+    })
 
     if (evtName) table.addEventListener(evtName, e => {
         console.log(e)

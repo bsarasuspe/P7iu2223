@@ -22,12 +22,12 @@
             overflow-x: hidden !important
         }
 
-        .no-select{
+        .no-select {
             user-select: none;
         }
-        
-        .click-transparent{
-            pointer-events:none
+
+        .click-transparent {
+            pointer-events: none
         }
     </style>
 
@@ -83,8 +83,7 @@
                             Cursos</button>
                     </li>
                 </ul>
-                <div class="tab-content almost_full_height no_vertical_overflow_scroll"
-                    id="myTabContent">
+                <div class="tab-content almost_full_height no_vertical_overflow_scroll" id="myTabContent">
                     <div class="tab-pane fade show active" id="usuarios-tab-pane" role="tabpanel"
                         aria-labelledby="usuarios-tab" tabindex="0">
                         <div id="users">
@@ -146,12 +145,59 @@
                         <!-- reemplazar desde JS -->
                         Editando patata
                     </h5>
-                    <button type="button" id="confirmation_exit" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" id="confirmation_exit" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-               
+
                 <div class="modal-footer">
-                    <button type="button" id="confirmation_cancel" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmation_cancel" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" id="confirmation_ok" class="btn btn-danger edit">⚠ OK ⚠</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+                    Modal para pedir un curso
+                    siempre usamos el mismo, y no se muestra hasta que hace falta
+                -->
+    <div class="modal fade" id="course_select_modal" tabindex="-1" aria-labelledby="cmConfirmLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Eliga un curso donde matricular a los usuarios selecionados
+                    </h5>
+                    <button type="button" id="course_select_exit" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select id="course_select" class="m-1 form-select form-select-sm">
+                        <!-- llenar desde js -->
+                    </select>
+                    <select id="edition_select" class="m-1 form-select form-select-sm">
+                        <!-- llenar desde js -->
+                    </select>
+
+                    Añadir como: 
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio_alumno"
+                            checked />
+                        <label class="form-check-label" for="radio_alumno"> Alumno </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio_profesor" />
+                        <label class="form-check-label" for="radio_profesor"> Profesor </label>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="course_select_cancel" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="course_select_ok" class="btn btn-primary edit">OK</button>
                 </div>
             </div>
         </div>

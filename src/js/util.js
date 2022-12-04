@@ -360,7 +360,7 @@ export function sameAs(o, pattern) {
     }
     return true;
 }
-
+// confirmación propia
 let confirmation_callback;
 let disable_next_confirmation = false;
 
@@ -372,7 +372,6 @@ document.querySelector("#confirmation_modal > :first-child > :first-child").addE
 
 export function custom_confirm(msg) {
 
-    console.log(msg, document.querySelector("#confirmation_modal"))
     document.querySelector("#confirmation_msg").textContent = msg;
     document.querySelector("#confirmation_modal").className = "modal fade show"
     document.querySelector("#confirmation_modal").style.display = "block"
@@ -386,6 +385,86 @@ export function custom_confirm(msg) {
             if (disable_next_confirmation) { disable_next_confirmation = false; return }
             document.querySelector("#confirmation_modal").className = "modal fade"
             document.querySelector("#confirmation_modal").style.display = ""
+            backdrop.parentNode.removeChild(backdrop);
+            r(val);
+        };
+
+    })
+}
+
+// seleción de cursos propia
+
+let course_select_callback;
+let disable_next_course_select = false;
+
+let course_select_dropdown = document.querySelector("#course_select")
+let edition_select_dropdown = document.querySelector("#edition_select")
+
+course_select_dropdown.addEventListener("change", () => {
+    document.querySelector("#course_select_ok").disabled = true
+
+
+    let editions = Cm.getEditions().filter(({ course }) => course == course_select_dropdown.value);
+    console.log(course_select_dropdown.value, Cm.getEditions(), editions)
+
+    if (editions.length == 0) {
+        edition_select_dropdown.innerHTML = `<option value="">No hay ediciones para este curso</option>\n`
+    } else if (editions.length == 1) {
+        edition_select_dropdown.innerHTML = ``
+        document.querySelector("#course_select_ok").disabled = false
+    } else {
+        edition_select_dropdown.innerHTML = `<option value=''>selecione una edición</option>\n`
+    }
+    for (const edition of editions) {
+        console.log(edition)
+        edition_select_dropdown.innerHTML += `<option value="${edition.id}">${edition.name}</option>\n`
+    }
+
+})
+
+edition_select_dropdown.addEventListener("change", () => {
+    if (edition_select_dropdown.value != "") {
+        document.querySelector("#course_select_ok").disabled = false
+    } else {
+        document.querySelector("#course_select_ok").disabled = true
+    }
+})
+
+
+document.querySelector("#course_select_ok").addEventListener("click", () => {
+    let user_type = document.querySelector("#radio_profesor").checked ? "profesor" : "alumno"
+    console.log(user_type);
+
+    course_select_callback({
+        "edition": edition_select_dropdown.value, "tipo_de_usuario": user_type
+    })
+})
+document.querySelector("#course_select_cancel").addEventListener("click", () => { course_select_callback(undefined) })
+document.querySelector("#course_select_modal").addEventListener("click", () => { course_select_callback(undefined) })
+document.querySelector("#course_select_exit").addEventListener("click", () => { course_select_callback(undefined) })
+document.querySelector("#course_select_modal > :first-child > :first-child").addEventListener("click", () => { disable_next_course_select = true; })
+
+export function edition_select() {
+    document.querySelector("#course_select_ok").disabled = true
+
+    course_select_dropdown.innerHTML = "<option value=''>selecione un curso</option>\n"
+    for (const course of Cm.getCourses()) {
+        console.log(course)
+        course_select_dropdown.innerHTML += `<option value="${course.id}">${course.name}</option>\n`
+    }
+
+    document.querySelector("#course_select_modal").className = "modal fade show"
+    document.querySelector("#course_select_modal").style.display = "block"
+
+    let backdrop = document.createElement("div");
+    backdrop.className = "modal-backdrop fade show";
+    document.body.appendChild(backdrop)
+
+    return new Promise((r) => {
+        course_select_callback = (val) => {
+            if (disable_next_course_select) { disable_next_course_select = false; return }
+            document.querySelector("#course_select_modal").className = "modal fade"
+            document.querySelector("#course_select_modal").style.display = ""
             backdrop.parentNode.removeChild(backdrop);
             r(val);
         };
