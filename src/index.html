@@ -209,16 +209,18 @@
         </div>
     </div>
 
-    <div class="toast hide" id="undo_toast">
-        <div class="toast-header">
-            Toast Header
-            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-        </div>
-        <div class="toast-body">
-            Some text inside the toast body
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="undo_toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Deshacer</strong>
+                <small id="undo_time">justo ahora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="undo_msg">
+                Hello, world! This is a toast message.
+            </div>
         </div>
     </div>
-
 
 
     <!-- Bootstrap usando una copia local -->

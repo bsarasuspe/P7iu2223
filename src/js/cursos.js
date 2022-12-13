@@ -152,11 +152,15 @@ U.one("#restore").addEventListener('click', () => {
     let metadata = Cm.restoreState();
     if (metadata.msg) {
 
+        document.getElementById("undo_msg").innerText = "restaurado el estado: " + metadata.msg.split("?")[0];
+        let t = new Date(metadata.time);
+        document.getElementById("undo_time").innerText = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
+
         (new bootstrap.Toast(document.querySelectorAll('#undo_toast')[0])).show()
         setTimeout(() => {
 
             (new bootstrap.Toast(document.querySelectorAll('#undo_toast')[0])).hide()
-        }, 1000)
+        }, 5000)
 
     }
 
