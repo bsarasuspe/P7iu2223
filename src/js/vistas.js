@@ -20,21 +20,21 @@ import * as Cm from './cmapi.js'
  */
 
 const roleClasses = {
-    [Cm.UserRole.TEACHER]: "badge text-bg-primary opacity-50",
-    [Cm.UserRole.STUDENT]: "badge text-bg-success opacity-50",
-    [Cm.UserRole.ADMIN]: "badge text-bg-warning opacity-50"
+    [Cm.UserRole.TEACHER]: "badge text-bg-primary opacity-100",
+    [Cm.UserRole.STUDENT]: "badge text-bg-success opacity-100",
+    [Cm.UserRole.ADMIN]: "badge text-bg-warning opacity-100"
 }
 
 const areaClasses = {
-    [Cm.CourseArea.OFFICE]: "badge text-bg-secondary opacity-50",
-    [Cm.CourseArea.INTERNET]: "badge text-bg-warning opacity-50",
-    [Cm.CourseArea.IT]: "badge text-bg-danger opacity-50"
+    [Cm.CourseArea.OFFICE]: "badge text-bg-secondary opacity-100",
+    [Cm.CourseArea.INTERNET]: "badge text-bg-primary opacity-100",
+    [Cm.CourseArea.IT]: "badge text-bg-success opacity-100"
 }
 
 const levelClasses = {
-    [Cm.CourseLevel.INITIATION]: "badge text-bg-success opacity-25",
-    [Cm.CourseLevel.GENERALIST]: "badge text-bg-success opacity-50",
-    [Cm.CourseLevel.SPECIALIST]: "badge text-bg-success opacity-75"
+    [Cm.CourseLevel.INITIATION]: "badge text-bg-danger opacity-100",
+    [Cm.CourseLevel.GENERALIST]: "badge text-bg-warning opacity-100",
+    [Cm.CourseLevel.SPECIALIST]: "badge text-bg-info opacity-100"
 }
 
 
