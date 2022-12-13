@@ -146,20 +146,29 @@ function update() {
 }
 
 // asociamos botones de prueba para GUARDAR y RESTAURAR estado
-U.one("#save").addEventListener('click', () => Cm.saveState());
+U.one("#save").addEventListener('click', () => {
+    let t = new Date()
+    Cm.saveState("estado guardado por el usuario a las " + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds())
+});
+
+
 U.one("#clean").addEventListener('click', () => localStorage.clear());
-U.one("#restore").addEventListener('click', () => {
+
+let toast_hide_timeout;
+U.one("#restore").addEventListener('click', async () => {
+    if (!await U.custom_confirm("¿Quieres desacer hasta el " + Cm.last_state_metadata().msg + "?", true, "Los cambios hechos desde entonces serán sobreescritos")) return
     let metadata = Cm.restoreState();
     if (metadata.msg) {
 
         document.getElementById("undo_msg").innerText = "restaurado el " + metadata.msg.split("?")[0];
         let t = new Date(metadata.time);
-        document.getElementById("undo_time").innerText = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
+        document.getElementById("undo_time").innerText = "hora: " + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
 
-        (new bootstrap.Toast(document.querySelectorAll('#undo_toast')[0])).show()
-        setTimeout(() => {
-
-            (new bootstrap.Toast(document.querySelectorAll('#undo_toast')[0])).hide()
+        let toast = (new bootstrap.Toast(document.querySelectorAll('#undo_toast')[0]))
+        toast.show()
+        clearTimeout(toast_hide_timeout);
+        toast_hide_timeout = setTimeout(() => {
+            toast.hide()
         }, 5000)
 
     }

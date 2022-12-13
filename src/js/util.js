@@ -370,11 +370,19 @@ document.querySelector("#confirmation_modal").addEventListener("click", () => { 
 document.querySelector("#confirmation_exit").addEventListener("click", () => { confirmation_callback(false) })
 document.querySelector("#confirmation_modal > :first-child > :first-child").addEventListener("click", () => { disable_next_confirmation = true; })
 
-export function custom_confirm(msg) {
+export function custom_confirm(msg, not_save, explanation) {
 
     document.querySelector("#confirmation_msg").textContent = msg;
     document.querySelector("#confirmation_modal").className = "modal fade show"
     document.querySelector("#confirmation_modal").style.display = "block"
+
+    if (explanation) {
+        document.querySelector("#confirmation_modal_explanation").textContent = explanation
+        document.querySelector("#confirmation_modal_explanation").style.display = ""
+    } else {
+        document.querySelector("#confirmation_modal_explanation").style.display = "none"
+
+    }
 
     let backdrop = document.createElement("div");
     backdrop.className = "modal-backdrop fade show";
@@ -382,7 +390,7 @@ export function custom_confirm(msg) {
 
     return new Promise((r) => {
         confirmation_callback = (val) => {
-            if (val == true) {
+            if (val == true && !not_save) {
                 Cm.saveState("estado anterior a " + msg);
             }
             if (disable_next_confirmation) { disable_next_confirmation = false; return }

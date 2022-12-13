@@ -626,8 +626,23 @@ function restoreState(token) {
 
     let entry = JSON.parse(localStorage.getItem(token));
 
+    console.log(entry, JSON.parse(localStorage.getItem(token)), localStorage.getItem(token), token)
+
     state = updateState(entry.state);
     return entry.metadata
+}
+
+function last_state_metadata(){
+    let stack = localStorage.getItem('stack');
+    if (!stack) {
+        stack = [];
+    } else {
+        stack = JSON.parse(stack);
+    }
+    let token = stack.pop();
+    let entry = JSON.parse(localStorage.getItem(token));
+
+    return entry.metadata ;
 }
 
 // cosas que estarán disponibles desde fuera de este módulo
@@ -665,6 +680,7 @@ export {
     getResults,
     saveState, // salva el estado actual (a localStorage; devuelve ID asignado)
     restoreState, // restaura un estado previamente guardado
+    last_state_metadata,
 
     // para añadir o eliminar profes o alumnos de ediciones, 
     //   usa setEdition y modifica las listas de IDs de alumnos y/o profesores
