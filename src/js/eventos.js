@@ -281,7 +281,7 @@ export function bindSetResults(clickSelector, callback) {
                 rating
             )
             Cm.setResult(result);
-        }));
+        }));    
     }));
 }
 
