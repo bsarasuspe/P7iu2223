@@ -392,7 +392,7 @@ function rmCourse(courseId) {
 }
 
 function mkEditionName(courseName, year) {
-    const sufijo = `${year}-${(""+(year+1)).slice(-2)}`; // 2022-23
+    const sufijo = `${year}-${("" + (year + 1)).slice(-2)}`; // 2022-23
     return `${courseName} (${sufijo})`;
 }
 
@@ -580,7 +580,7 @@ function getResults(pattern) {
  * Salva el estado actual, y permite recuperarlo via restoreState
  * @returns {string} token
  */
- function saveState() {
+function saveState(msg) {
     const randomToken = U.randomString(8);
 
     // add token to stack
@@ -594,7 +594,12 @@ function getResults(pattern) {
     localStorage.setItem('stack', JSON.stringify(stack));
     console.log(`copia guardada ${randomToken}; copias de seguridad existentes`, stack);
 
-    localStorage.setItem(randomToken, JSON.stringify(state));
+    let metadata = {
+        msg,
+        time = (new Date()).getTime();
+    }
+
+    localStorage.setItem(randomToken, JSON.stringify({ metadata, state }));
 }
 /**
  * Restaura un estado previamente guardado
@@ -619,11 +624,14 @@ function restoreState(token) {
     }
     console.log(`restaurada: ${token}; copias de seguridad existentes`, stack);
 
-    state = updateState(JSON.parse(localStorage.getItem(token)));
+    let entry = JSON.parse(localStorage.getItem(token));
+
+    state = updateState(entry.state);
+    return entry.metadata
 }
 
 // cosas que estarán disponibles desde fuera de este módulo
-// todo lo que NO se mencione aquí es privado (= inaccesible) desde fuera
+// .todo lo que NO se mencione aquí es privado (= inaccesible) desde fuera
 // podríamos haber evitado esto añadiendo `export` a todas las funciones "públicas"
 export {
 

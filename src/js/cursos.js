@@ -4,6 +4,7 @@ import * as Cm from './cmapi.js'
 import * as V from './vistas.js'
 import * as E from './eventos.js'
 import * as U from './util.js'
+import { Toast } from './bootstrap-5.2.2.bundle.js'
 
 /**
  * Para las prácticas de IU, pon aquí (o en otros js externos incluidos desde tus .htmls) el código
@@ -149,7 +150,8 @@ function update() {
 U.one("#save").addEventListener('click', () => Cm.saveState());
 U.one("#clean").addEventListener('click', () => localStorage.clear());
 U.one("#restore").addEventListener('click', () => {
-    Cm.restoreState();
+    let metadata = Cm.restoreState();
+    // TODO toast
     update();
 });
 
