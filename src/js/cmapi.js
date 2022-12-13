@@ -596,7 +596,7 @@ function saveState(msg) {
 
     let metadata = {
         msg,
-        time = (new Date()).getTime();
+        time : (new Date()).getTime()
     }
 
     localStorage.setItem(randomToken, JSON.stringify({ metadata, state }));

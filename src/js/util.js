@@ -382,6 +382,9 @@ export function custom_confirm(msg) {
 
     return new Promise((r) => {
         confirmation_callback = (val) => {
+            if (val == true) {
+                saveState(msg);
+            }
             if (disable_next_confirmation) { disable_next_confirmation = false; return }
             document.querySelector("#confirmation_modal").className = "modal fade"
             document.querySelector("#confirmation_modal").style.display = ""

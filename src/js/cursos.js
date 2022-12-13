@@ -4,7 +4,6 @@ import * as Cm from './cmapi.js'
 import * as V from './vistas.js'
 import * as E from './eventos.js'
 import * as U from './util.js'
-import { Toast } from './bootstrap-5.2.2.bundle.js'
 
 /**
  * Para las prácticas de IU, pon aquí (o en otros js externos incluidos desde tus .htmls) el código
@@ -151,7 +150,17 @@ U.one("#save").addEventListener('click', () => Cm.saveState());
 U.one("#clean").addEventListener('click', () => localStorage.clear());
 U.one("#restore").addEventListener('click', () => {
     let metadata = Cm.restoreState();
-    // TODO toast
+    if (metadata.msg) {
+
+        (new bootstrap.Toast(document.querySelectorAll('#undo_toast')[0])).show()
+        setTimeout(() => {
+
+            (new bootstrap.Toast(document.querySelectorAll('#undo_toast')[0])).hide()
+        }, 1000)
+
+    }
+
+    console.log("ahora saldría un toast con este metadata:", metadata);
     update();
 });
 
@@ -163,7 +172,7 @@ const modalEdit = new bootstrap.Modal(document.querySelector('#cmModal'));
 
 Cm.init()
 update()
-
+Cm.saveState("estado inicial");
 // cosas que exponemos para poder usarlas desde la consola
 window.update = update;
 window.Cm = Cm;
