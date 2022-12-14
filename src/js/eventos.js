@@ -36,7 +36,7 @@ export function bindRmFromEdition(clickSelector, callback) {
             o.addEventListener('click', async e => {
                 const userId = e.target.closest('tr').dataset.userId;
                 const editionId = e.target.closest('tr').dataset.editionId;
-                if (await custom_confirm("eliminar usuario " + Cm.resolve(userId).name + " de la edicion " + Cm.resolve(editionId).name + "?")) {
+                if (await custom_confirm("¿Eliminar usuario " + Cm.resolve(userId).name + " de la edicion " + Cm.resolve(editionId).name + "?")) {
                     console.log(e, userId, editionId);
                     const edition = Cm.resolve(editionId);
                     edition.students = edition.students.filter(o => o != userId);
@@ -56,7 +56,7 @@ export function bindRmEditionDetails(clickSelector, callback) {
         if (!o.listening) {
             o.listening = true;
             const id = e.target.dataset.id;
-            if (await custom_confirm("eliminar edicion" + Cm.resolve(id).name + "?")) {
+            if (await custom_confirm("¿Eliminar edicion" + Cm.resolve(id).name + "?")) {
 
                 console.log(e, id);
                 Cm.rmEdition(id);
@@ -80,7 +80,7 @@ export function bindRmCourseRow(clickSelector) {
     U.all(clickSelector).forEach(o => o.addEventListener('click', async e => {
         const row = e.target.closest("tr");
         const id = row.dataset.id;
-        if (await custom_confirm("eliminar curso " + Cm.resolve(id).name + "?")) {
+        if (await custom_confirm("¿Eliminar curso " + Cm.resolve(id).name + "?")) {
             console.log(e, id);
             Cm.rmCourse(id);
             row.remove();
@@ -93,7 +93,7 @@ export function bindRmUserRow(clickSelector) {
     U.all(clickSelector).forEach(o => o.addEventListener('click', async e => {
         const row = e.target.closest("tr");
         const id = row.dataset.id;
-        if (await custom_confirm(`eliminar usuario ${JSON.stringify(Cm.resolve(row.dataset.id).name)}?`)) {
+        if (await custom_confirm(`¿Eliminar usuario ${JSON.stringify(Cm.resolve(row.dataset.id).name)}?`)) {
 
             console.log(e, id);
             Cm.rmUser(id);
@@ -467,7 +467,7 @@ export function bindCheckboxColumn(selTabla, evtName, update) {
 
     let selected = [];
     bulk_delete.addEventListener("click", async () => {
-        if (await custom_confirm(`eliminar los usuarios selecionados?`)) {
+        if (await custom_confirm(`¿Eliminar los usuarios selecionados?`)) {
             for (let id of selected) {
                 Cm.rmUser(id);
             }

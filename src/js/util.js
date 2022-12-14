@@ -391,7 +391,7 @@ export function custom_confirm(msg, not_save, explanation) {
     return new Promise((r) => {
         confirmation_callback = (val) => {
             if (val == true && !not_save) {
-                Cm.saveState("estado anterior a " + msg);
+                Cm.saveState("estado anterior a " + msg.split("¿").pop().split("?")[0].toLowerCase());
             }
             if (disable_next_confirmation) { disable_next_confirmation = false; return }
             document.querySelector("#confirmation_modal").className = "modal fade"

@@ -160,7 +160,7 @@ U.one("#restore").addEventListener('click', async () => {
     let metadata = Cm.restoreState();
     if (metadata.msg) {
 
-        document.getElementById("undo_msg").innerText = "restaurado el " + metadata.msg.split("?")[0];
+        document.getElementById("undo_msg").innerText = "restaurado el " + metadata.msg;
         let t = new Date(metadata.time);
         document.getElementById("undo_time").innerText = "hora: " + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
 
